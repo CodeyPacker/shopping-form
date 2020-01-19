@@ -149,7 +149,7 @@ function handleSubmit(e) {
 
 function displayItems() {
   var html = items.map(function (item) {
-    return "<li class=\"shopping-item\">\n        <input type=\"checkbox\">\n        <span class=\"itemName\">".concat(item.name, "</span>\n        <button value=").concat(item.id, " aria-label=\"Remove ").concat(item.name, "\">&times;</button>\n      </li>\n      ");
+    return "<li class=\"shopping-item\">\n        <input\n          value=".concat(item.id, "\n          type=\"checkbox\"\n          ").concat(item.complete ? 'checked' : '', "\n        >\n        <span class=\"itemName\">").concat(item.name, "</span>\n        <button value=").concat(item.id, " aria-label=\"Remove ").concat(item.name, "\">&times;</button>\n      </li>\n      ");
   }).join('');
   list.innerHTML = html;
 }
@@ -180,12 +180,26 @@ function deleteItem(id) {
   list.dispatchEvent(new CustomEvent('itemsUpdated'));
 }
 
+function markAsComplete(id) {
+  var itemRef = items.find(function (item) {
+    return item.id === id;
+  });
+  itemRef.complete = !itemRef.complete;
+  list.dispatchEvent(new CustomEvent('itemsUpdated'));
+}
+
 shoppingForm.addEventListener('submit', handleSubmit);
 list.addEventListener('itemsUpdated', displayItems);
 list.addEventListener('itemsUpdated', mirrorToLocalStorage);
 list.addEventListener('click', function (e) {
+  var id = parseInt(e.target.value);
+
   if (e.target.matches('button')) {
-    deleteItem(parseInt(e.target.value));
+    deleteItem(id);
+  }
+
+  if (e.target.matches('input[type="checkbox"]')) {
+    markAsComplete(id);
   }
 });
 restoreFromLocalStorage();
