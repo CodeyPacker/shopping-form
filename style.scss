@@ -12,6 +12,7 @@ html {
   --shadow:
     -2px -2px 8px 0px var(--light-shadow),
     2px 2px 8px 0px var(--dark-shadow);
+    --border: #a3b1c6;
 }
 
 body {
@@ -42,6 +43,7 @@ button {
 
 .shopping {
   display: flex;
+  align-items: center;
   justify-content: center;
   margin-bottom: 20px;
 
@@ -54,6 +56,7 @@ button {
     margin-right: 15px;
     max-width: 200px;
     width: 100%;
+    border: 1px solid #e0e5ec;
   }
 }
 
@@ -88,4 +91,23 @@ button {
   button { margin-left: auto; }
 }
 
-// background: linear-gradient(90deg, #efd5ff 0%, #515ada 100%);
+input, button, div {
+  &[data-contrast="low"] {
+    border: 0;
+  }
+
+  &[data-contrast="high"] {
+    border: 2px solid black;
+    box-shadow: unset;
+    color: black;
+  }
+}
+
+span {
+  &[data-contrast="low"] {
+    color: var(--dark-shadow);
+  }
+  &[data-contrast="high"] {
+    color: #000;
+  }
+}

@@ -149,7 +149,7 @@ function handleSubmit(e) {
 
 function displayItems() {
   var html = items.map(function (item) {
-    return "<li class=\"shopping-item\">\n        <input\n          value=".concat(item.id, "\n          type=\"checkbox\"\n          ").concat(item.complete && 'checked', "\n        >\n        <span class=\"itemName\">").concat(item.name, "</span>\n        <button value=").concat(item.id, " aria-label=\"Remove ").concat(item.name, "\">&times;</button>\n      </li>\n      ");
+    return "<li class=\"shopping-item\">\n        <input\n          value=".concat(item.id, "\n          type=\"checkbox\"\n          ").concat(item.complete && 'checked', "\n        >\n        <span class=\"itemName\" data-contrast=\"high\" >").concat(item.name, "</span>\n        <button value=").concat(item.id, " aria-label=\"Remove ").concat(item.name, " \"data-contrast=\"high\">&times;</button>\n      </li>\n      ");
   }).join('');
   list.innerHTML = html;
 }
@@ -159,8 +159,7 @@ function mirrorToLocalStorage() {
 }
 
 function restoreFromLocalStorage() {
-  console.info('Restoring from LS'); // pull the items from LS
-
+  // pull the items from LS
   var lsItems = JSON.parse(localStorage.getItem('items'));
 
   if (lsItems.length) {

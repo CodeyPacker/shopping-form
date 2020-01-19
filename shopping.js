@@ -33,8 +33,8 @@ function displayItems() {
           type="checkbox"
           ${item.complete && 'checked'}
         >
-        <span class="itemName">${item.name}</span>
-        <button value=${item.id} aria-label="Remove ${item.name}">&times;</button>
+        <span class="itemName" data-contrast="high" >${item.name}</span>
+        <button value=${item.id} aria-label="Remove ${item.name} "data-contrast="high">&times;</button>
       </li>
       `
     )
@@ -47,7 +47,6 @@ function mirrorToLocalStorage() {
 }
 
 function restoreFromLocalStorage() {
-  console.info('Restoring from LS');
   // pull the items from LS
   const lsItems = JSON.parse(localStorage.getItem('items'));
   if (lsItems.length) {

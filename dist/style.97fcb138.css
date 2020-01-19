@@ -121,7 +121,8 @@ html {
     inset -2px -2px 5px var(--light-shadow);
   --shadow:
     -2px -2px 8px 0px var(--light-shadow),
-    2px 2px 8px 0px var(--dark-shadow); }
+    2px 2px 8px 0px var(--dark-shadow);
+  --border: #a3b1c6; }
 
 body {
   font-family: 'Open Sans', sans-serif;
@@ -147,6 +148,7 @@ button {
 
 .shopping {
   display: flex;
+  align-items: center;
   justify-content: center;
   margin-bottom: 20px; }
   .shopping input {
@@ -157,7 +159,8 @@ button {
     box-shadow: var(--pressed-shadow);
     margin-right: 15px;
     max-width: 200px;
-    width: 100%; }
+    width: 100%;
+    border: 1px solid #e0e5ec; }
 
 .shopping-list {
   margin-right: 15px;
@@ -187,6 +190,20 @@ button {
     opacity: 0.5; }
   .shopping-item button {
     margin-left: auto; }
+
+input[data-contrast="low"], button[data-contrast="low"], div[data-contrast="low"] {
+  border: 0; }
+
+input[data-contrast="high"], button[data-contrast="high"], div[data-contrast="high"] {
+  border: 2px solid black;
+  box-shadow: unset;
+  color: black; }
+
+span[data-contrast="low"] {
+  color: var(--dark-shadow); }
+
+span[data-contrast="high"] {
+  color: #000; }
 
 
 /*# sourceMappingURL=/style.97fcb138.css.map */
