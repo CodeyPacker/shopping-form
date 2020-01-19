@@ -31,7 +31,7 @@ function displayItems() {
         <input
           value=${item.id}
           type="checkbox"
-          ${item.complete ? 'checked' : ''}
+          ${item.complete && 'checked'}
         >
         <span class="itemName">${item.name}</span>
         <button value=${item.id} aria-label="Remove ${item.name}">&times;</button>
