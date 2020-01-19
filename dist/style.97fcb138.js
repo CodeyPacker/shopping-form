@@ -117,93 +117,79 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"shopping.js":[function(require,module,exports) {
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+})({"../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
+var bundleURL = null;
 
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
-
-function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
-
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
-
-var shoppingForm = document.querySelector('.shopping');
-var list = document.querySelector('.list'); // State
-
-var items = [];
-
-function handleSubmit(e) {
-  e.preventDefault();
-  var name = e.currentTarget.item.value;
-  if (!name) return;
-  var item = {
-    name: name,
-    id: Date.now(),
-    complete: false
-  }; // push items into state
-
-  items.push(item);
-  e.target.reset(); // fire off a custom event that tells anyone else who cares
-
-  list.dispatchEvent(new CustomEvent('itemsUpdated'));
-}
-
-function displayItems() {
-  var html = items.map(function (item) {
-    return "<li class=\"shopping-item\">\n        <input\n          value=".concat(item.id, "\n          type=\"checkbox\"\n          ").concat(item.complete && 'checked', "\n        >\n        <span class=\"itemName\">").concat(item.name, "</span>\n        <button value=").concat(item.id, " aria-label=\"Remove ").concat(item.name, "\">&times;</button>\n      </li>\n      ");
-  }).join('');
-  list.innerHTML = html;
-}
-
-function mirrorToLocalStorage() {
-  localStorage.setItem('items', JSON.stringify(items));
-}
-
-function restoreFromLocalStorage() {
-  console.info('Restoring from LS'); // pull the items from LS
-
-  var lsItems = JSON.parse(localStorage.getItem('items'));
-
-  if (lsItems.length) {
-    var _items;
-
-    (_items = items).push.apply(_items, _toConsumableArray(lsItems));
-
-    list.dispatchEvent(new CustomEvent('itemsUpdated'));
-  }
-}
-
-function deleteItem(id) {
-  // update our items array without this one
-  items = items.filter(function (item) {
-    return item.id !== id;
-  });
-  list.dispatchEvent(new CustomEvent('itemsUpdated'));
-}
-
-function markAsComplete(id) {
-  var itemRef = items.find(function (item) {
-    return item.id === id;
-  });
-  itemRef.complete = !itemRef.complete;
-  list.dispatchEvent(new CustomEvent('itemsUpdated'));
-}
-
-shoppingForm.addEventListener('submit', handleSubmit);
-list.addEventListener('itemsUpdated', displayItems);
-list.addEventListener('itemsUpdated', mirrorToLocalStorage);
-list.addEventListener('click', function (e) {
-  var id = parseInt(e.target.value);
-
-  if (e.target.matches('button')) {
-    deleteItem(id);
+function getBundleURLCached() {
+  if (!bundleURL) {
+    bundleURL = getBundleURL();
   }
 
-  if (e.target.matches('input[type="checkbox"]')) {
-    markAsComplete(id);
+  return bundleURL;
+}
+
+function getBundleURL() {
+  // Attempt to find the URL of the current script and use that as the base URL
+  try {
+    throw new Error();
+  } catch (err) {
+    var matches = ('' + err.stack).match(/(https?|file|ftp|chrome-extension|moz-extension):\/\/[^)\n]+/g);
+
+    if (matches) {
+      return getBaseURL(matches[0]);
+    }
   }
-});
-restoreFromLocalStorage();
-},{}],"../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+
+  return '/';
+}
+
+function getBaseURL(url) {
+  return ('' + url).replace(/^((?:https?|file|ftp|chrome-extension|moz-extension):\/\/.+)\/[^/]+$/, '$1') + '/';
+}
+
+exports.getBundleURL = getBundleURLCached;
+exports.getBaseURL = getBaseURL;
+},{}],"../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/css-loader.js":[function(require,module,exports) {
+var bundle = require('./bundle-url');
+
+function updateLink(link) {
+  var newLink = link.cloneNode();
+
+  newLink.onload = function () {
+    link.remove();
+  };
+
+  newLink.href = link.href.split('?')[0] + '?' + Date.now();
+  link.parentNode.insertBefore(newLink, link.nextSibling);
+}
+
+var cssTimeout = null;
+
+function reloadCSS() {
+  if (cssTimeout) {
+    return;
+  }
+
+  cssTimeout = setTimeout(function () {
+    var links = document.querySelectorAll('link[rel="stylesheet"]');
+
+    for (var i = 0; i < links.length; i++) {
+      if (bundle.getBaseURL(links[i].href) === bundle.getBundleURL()) {
+        updateLink(links[i]);
+      }
+    }
+
+    cssTimeout = null;
+  }, 50);
+}
+
+module.exports = reloadCSS;
+},{"./bundle-url":"../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/bundle-url.js"}],"style.scss":[function(require,module,exports) {
+var reloadCSS = require('_css_loader');
+
+module.hot.dispose(reloadCSS);
+module.hot.accept(reloadCSS);
+},{"_css_loader":"../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/css-loader.js"}],"../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -407,5 +393,5 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js","shopping.js"], null)
-//# sourceMappingURL=/shopping.3c459b95.js.map
+},{}]},{},["../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js"], null)
+//# sourceMappingURL=/style.97fcb138.js.map
