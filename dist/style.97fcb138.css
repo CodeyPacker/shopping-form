@@ -125,11 +125,25 @@ html {
 
 body {
   font-family: 'Open Sans', sans-serif;
+  color: var(--dark-shadow);
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
   background-color: var(--light-base); }
+
+button {
+  background-color: var(--light-base);
+  border: 0;
+  color: var(--dark-shadow);
+  border-radius: 4px;
+  box-shadow: var(--shadow);
+  border-radius: 4px;
+  transition: box-shadow .3s;
+  height: 32px;
+  width: 32px; }
+  button:hover {
+    box-shadow: var(--pressed-shadow); }
 
 .shopping {
   display: flex;
@@ -144,17 +158,6 @@ body {
     margin-right: 15px;
     max-width: 200px;
     width: 100%; }
-  .shopping button {
-    background-color: var(--light-base);
-    border: 0;
-    border-radius: 4px;
-    box-shadow: var(--shadow);
-    border-radius: 4px;
-    transition: box-shadow .3s;
-    height: 32px;
-    width: 32px; }
-    .shopping button:hover {
-      box-shadow: var(--pressed-shadow); }
 
 .shopping-list {
   margin-right: 15px;
@@ -173,23 +176,17 @@ body {
 
 .shopping-item {
   display: flex;
+  align-items: center;
   border-radius: 4px;
   background-color: var(--light-base);
-  padding: 10px 15px;
-  box-shadow: var(--shadow);
-  margin-bottom: 20px; }
+  padding: 5px 0;
+  margin-bottom: 10px; }
   .shopping-item input[type="checkbox"] {
     margin-right: 1rem; }
   .shopping-item input[type="checkbox"]:checked + .itemName {
     opacity: 0.5; }
   .shopping-item button {
-    padding: 0;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: transform 0.2s;
     margin-left: auto; }
-    .shopping-item button:hover {
-      transform: scale(1.4); }
 
 
 /*# sourceMappingURL=/style.97fcb138.css.map */

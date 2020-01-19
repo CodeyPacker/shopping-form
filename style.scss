@@ -16,11 +16,28 @@ html {
 
 body {
   font-family: 'Open Sans', sans-serif;
+  color: var(--dark-shadow);
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
   background-color: var(--light-base);
+}
+
+button {
+  background-color: var(--light-base);
+  border: 0;
+  color: var(--dark-shadow);
+  border-radius: 4px;
+  box-shadow: var(--shadow);
+  border-radius: 4px;
+  transition: box-shadow .3s;
+  height: 32px;
+  width: 32px;
+
+  &:hover {
+    box-shadow: var(--pressed-shadow);
+  }
 }
 
 .shopping {
@@ -37,21 +54,6 @@ body {
     margin-right: 15px;
     max-width: 200px;
     width: 100%;
-  }
-
-  button {
-    background-color: var(--light-base);
-    border: 0;
-    border-radius: 4px;
-    box-shadow: var(--shadow);
-    border-radius: 4px;
-    transition: box-shadow .3s;
-    height: 32px;
-    width: 32px;
-
-    &:hover {
-      box-shadow: var(--pressed-shadow);
-    }
   }
 }
 
@@ -74,24 +76,16 @@ body {
 
 .shopping-item {
   display: flex;
+  align-items: center;
   border-radius: 4px;
   background-color: var(--light-base);
-  padding: 10px 15px;
-  box-shadow: var(--shadow);
-  margin-bottom: 20px;
+  padding: 5px 0;
+  margin-bottom: 10px;
 
   input[type="checkbox"] { margin-right: 1rem; }
   input[type="checkbox"]:checked + .itemName { opacity: 0.5; }
 
-  button {
-    padding: 0;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: transform 0.2s;
-    margin-left: auto;
-
-    &:hover {
-      transform: scale(1.4);
-    }
-  }
+  button { margin-left: auto; }
 }
+
+// background: linear-gradient(90deg, #efd5ff 0%, #515ada 100%);
