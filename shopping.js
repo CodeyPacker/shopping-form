@@ -2,7 +2,7 @@ const shoppingForm = document.querySelector('.shopping');
 const list = document.querySelector('.list');
 
 // State
-const items = [];
+let items = [];
 
 function handleSubmit(e) {
   e.preventDefault();
@@ -47,9 +47,6 @@ function restoreFromLocalStorage() {
   // pull the items from LS
   const lsItems = JSON.parse(localStorage.getItem('items'));
   if (lsItems.length) {
-    // items = lsItems;
-    // lsItems.forEach(item => items.push(item));
-    // items.push(lsItems[0], lsItems[1]);
     items.push(...lsItems);
     list.dispatchEvent(new CustomEvent('itemsUpdated'));
   }
@@ -57,6 +54,7 @@ function restoreFromLocalStorage() {
 
 function deleteItem(id) {
   // update our items array without this one
+  items = items.filter(item => item.id !== id)
   list.dispatchEvent(new CustomEvent('itemsUpdated'));
 }
 
@@ -65,7 +63,7 @@ list.addEventListener('itemsUpdated', displayItems);
 list.addEventListener('itemsUpdated', mirrorToLocalStorage);
 list.addEventListener('click', function(e) {
   if (e.target.matches('button')) {
-    deleteItem(e.target.value);
+    deleteItem(parseInt(e.target.value));
   }
 });
 

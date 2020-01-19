@@ -164,16 +164,19 @@ function restoreFromLocalStorage() {
   var lsItems = JSON.parse(localStorage.getItem('items'));
 
   if (lsItems.length) {
-    // items = lsItems;
-    // lsItems.forEach(item => items.push(item));
-    // items.push(lsItems[0], lsItems[1]);
-    items.push.apply(items, _toConsumableArray(lsItems));
+    var _items;
+
+    (_items = items).push.apply(_items, _toConsumableArray(lsItems));
+
     list.dispatchEvent(new CustomEvent('itemsUpdated'));
   }
 }
 
 function deleteItem(id) {
   // update our items array without this one
+  items = items.filter(function (item) {
+    return item.id !== id;
+  });
   list.dispatchEvent(new CustomEvent('itemsUpdated'));
 }
 
@@ -182,7 +185,7 @@ list.addEventListener('itemsUpdated', displayItems);
 list.addEventListener('itemsUpdated', mirrorToLocalStorage);
 list.addEventListener('click', function (e) {
   if (e.target.matches('button')) {
-    deleteItem(e.target.value);
+    deleteItem(parseInt(e.target.value));
   }
 });
 restoreFromLocalStorage();
