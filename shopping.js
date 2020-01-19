@@ -6,7 +6,6 @@ const items = [];
 
 function handleSubmit(e) {
   e.preventDefault();
-  console.log('submitted');
   const name = e.currentTarget.item.value;
 
   if (!name) return;
@@ -19,9 +18,10 @@ function handleSubmit(e) {
 
   // push items into state
   items.push(item);
-  console.log(`There are currently ${items.length} in your list.`);
   e.target.reset();
-  displayItems();
+
+  // fire off a custom event that tells anyone else who cares
+  list.dispatchEvent(new CustomEvent('itemsUpdated'));
 }
 
 function displayItems() {
@@ -30,7 +30,7 @@ function displayItems() {
       item => `<li class="shopping-item">
         <input type="checkbox">
         <span class="itemName">${item.name}</span>
-        <button aria-label="Remove ${item.name}">&times;</button>
+        <button value=${item.id} aria-label="Remove ${item.name}">&times;</button>
       </li>
       `
     )
@@ -38,4 +38,35 @@ function displayItems() {
     list.innerHTML = html;
 }
 
+function mirrorToLocalStorage() {
+  localStorage.setItem('items', JSON.stringify(items));
+}
+
+function restoreFromLocalStorage() {
+  console.info('Restoring from LS');
+  // pull the items from LS
+  const lsItems = JSON.parse(localStorage.getItem('items'));
+  if (lsItems.length) {
+    // items = lsItems;
+    // lsItems.forEach(item => items.push(item));
+    // items.push(lsItems[0], lsItems[1]);
+    items.push(...lsItems);
+    list.dispatchEvent(new CustomEvent('itemsUpdated'));
+  }
+}
+
+function deleteItem(id) {
+  // update our items array without this one
+  list.dispatchEvent(new CustomEvent('itemsUpdated'));
+}
+
 shoppingForm.addEventListener('submit', handleSubmit);
+list.addEventListener('itemsUpdated', displayItems);
+list.addEventListener('itemsUpdated', mirrorToLocalStorage);
+list.addEventListener('click', function(e) {
+  if (e.target.matches('button')) {
+    deleteItem(e.target.value);
+  }
+});
+
+restoreFromLocalStorage();
