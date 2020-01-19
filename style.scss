@@ -2,18 +2,20 @@
 
 /* Variables */
 html {
-  --light-base: #e0e5ec;
-  --grey: #e7e7e7;
-  --lm-light-shadow: #fff;
-  --lm-dark-shadow: #a3b1c6;
-  --text-shadow: 2px 2px 0 rgba(0,0,0,0.2);
+  --base: #e0e5ec;
+  --light-shadow: #fff;
+  --dark-shadow: #a3b1c6;
   --box-shadow: 0 0 5px 5px rgba(0,0,0,0.2);
-  font-size: 62.5%;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  box-sizing: border-box;
+  --pressed-shadow:
+    inset 2px 2px 5px var(--dark-shadow),
+    inset -2px -2px 5px var(--light-shadow);
+  --shadow:
+    -2px -2px 8px 0px var(--light-shadow),
+    2px 2px 8px 0px var(--dark-shadow);
 }
 
 body {
+  font-family: 'Open Sans', sans-serif;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -24,17 +26,44 @@ body {
 .shopping {
   display: flex;
   justify-content: center;
+  margin-bottom: 20px;
+
+  input {
+    background-color: var(--light-base);
+    border: 0;
+    border-radius: 4px;
+    padding: 8px 15px;
+    box-shadow: var(--pressed-shadow);
+    margin-right: 15px;
+    max-width: 200px;
+    width: 100%;
+  }
+
+  button {
+    background-color: var(--light-base);
+    border: 0;
+    border-radius: 4px;
+    box-shadow: var(--shadow);
+    border-radius: 4px;
+    transition: box-shadow .3s;
+    height: 32px;
+    width: 32px;
+
+    &:hover {
+      box-shadow: var(--pressed-shadow);
+    }
+  }
 }
 
 .shopping-list {
-  padding: 20px;
-  max-width: 600px;
+  margin-right: 15px;
+  margin-left: 15px;
+  padding: 40px 30px;
+  max-width: 400px;
   width: 100%;
   min-height: 200px;
 	border-radius: 12px;
-	box-shadow:
-		-9px -9px 16px 0px var(--lm-light-shadow),
-		9px 9px 16px 0px var(--lm-dark-shadow);
+	box-shadow: var(--shadow);
 }
 
 .shopping-list ul {
@@ -44,12 +73,12 @@ body {
 }
 
 .shopping-item {
-  padding: 1rem 0;
-  display: grid;
-  grid-template-columns: auto 1fr auto;
-  grid-gap: 1rem;
-  align-items: center;
-  border-bottom: 1px solid var(--gray);
+  display: flex;
+  border-radius: 4px;
+  background-color: var(--light-base);
+  padding: 10px 15px;
+  box-shadow: var(--shadow);
+  margin-bottom: 20px;
 
   input[type="checkbox"] { margin-right: 1rem; }
   input[type="checkbox"]:checked + .itemName { opacity: 0.5; }
@@ -59,6 +88,7 @@ body {
     font-size: 1rem;
     cursor: pointer;
     transition: transform 0.2s;
+    margin-left: auto;
 
     &:hover {
       transform: scale(1.4);
