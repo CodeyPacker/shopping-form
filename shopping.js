@@ -8,6 +8,9 @@ function handleSubmit(e) {
   e.preventDefault();
   console.log('submitted');
   const name = e.currentTarget.item.value;
+
+  if (!name) return;
+
   const item = {
     name,
     id: Date.now(),
@@ -17,7 +20,22 @@ function handleSubmit(e) {
   // push items into state
   items.push(item);
   console.log(`There are currently ${items.length} in your list.`);
-  e.currentTarget.item.value = '';
+  e.target.reset();
+  displayItems();
+}
+
+function displayItems() {
+  const html = items
+    .map(
+      item => `<li class="shopping-item">
+        <input type="checkbox">
+        <span class="itemName">${item.name}</span>
+        <button aria-label="Remove ${item.name}">&times;</button>
+      </li>
+      `
+    )
+    .join('');
+    list.innerHTML = html;
 }
 
 shoppingForm.addEventListener('submit', handleSubmit);
