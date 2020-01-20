@@ -122,7 +122,7 @@ html {
   --shadow:
     -2px -2px 8px 0px var(--light-shadow),
     2px 2px 8px 0px var(--dark-shadow);
-  --border: #a3b1c6; }
+  --border: #686868; }
 
 body {
   font-family: 'Open Sans', sans-serif;
@@ -141,14 +141,17 @@ button {
   border-radius: 4px;
   box-shadow: var(--shadow);
   border-radius: 4px;
-  transition: box-shadow .3s, border .2s;
+  transition: box-shadow .3s, border .2s, background-color .2s;
   padding: 7px; }
   button:hover {
     box-shadow: var(--pressed-shadow); }
+  button[data-contrast="high"] {
+    border: 2px solid var(--border); }
+    button[data-contrast="high"]:hover {
+      background-color: var(--border);
+      color: white; }
   button.toggle-contrast {
     margin-bottom: 20px; }
-    button.toggle-contrast[data-contrast="high"] {
-      border: 2px solid #686868; }
 
 .shopping {
   display: flex;
@@ -156,6 +159,7 @@ button {
   justify-content: center;
   margin-bottom: 20px; }
   .shopping input {
+    color: var(--border);
     background-color: var(--light-base);
     border: 0;
     border-radius: 4px;
@@ -202,15 +206,15 @@ input[data-contrast="low"], button[data-contrast="low"], div[data-contrast="low"
   border: 0; }
 
 input[data-contrast="high"], button[data-contrast="high"], div[data-contrast="high"] {
-  border: 2px solid #686868;
+  border: 2px solid var(--border);
   box-shadow: unset;
-  color: #686868; }
+  color: var(--border); }
 
 span[data-contrast="low"] {
   color: var(--dark-shadow); }
 
 span[data-contrast="high"] {
-  color: #686868; }
+  color: var(--border); }
 
 
 /*# sourceMappingURL=/style.97fcb138.css.map */

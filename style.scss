@@ -12,7 +12,7 @@ html {
   --shadow:
     -2px -2px 8px 0px var(--light-shadow),
     2px 2px 8px 0px var(--dark-shadow);
-    --border: #a3b1c6;
+    --border: #686868;
 }
 
 body {
@@ -33,20 +33,24 @@ button {
   border-radius: 4px;
   box-shadow: var(--shadow);
   border-radius: 4px;
-  transition: box-shadow .3s, border .2s;
+  transition: box-shadow .3s, border .2s, background-color .2s;
   padding: 7px;
-
 
   &:hover {
     box-shadow: var(--pressed-shadow);
   }
 
+  &[data-contrast="high"] {
+    border: 2px solid var(--border);
+
+    &:hover {
+      background-color: var(--border);
+      color: white;
+    }
+  }
+
   &.toggle-contrast {
     margin-bottom: 20px;
-
-    &[data-contrast="high"] {
-      border: 2px solid #686868;
-    }
   }
 }
 
@@ -57,6 +61,7 @@ button {
   margin-bottom: 20px;
 
   input {
+    color: var(--border);
     background-color: var(--light-base);
     border: 0;
     border-radius: 4px;
@@ -108,9 +113,9 @@ input, button, div {
   }
 
   &[data-contrast="high"] {
-    border: 2px solid #686868;
+    border: 2px solid var(--border);
     box-shadow: unset;
-    color: #686868;
+    color: var(--border);
   }
 }
 
@@ -119,6 +124,6 @@ span {
     color: var(--dark-shadow);
   }
   &[data-contrast="high"] {
-    color: #686868;
+    color: var(--border);
   }
 }
