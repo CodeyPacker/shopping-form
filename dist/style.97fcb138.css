@@ -148,7 +148,7 @@ button {
   button.toggle-contrast {
     margin-bottom: 20px; }
     button.toggle-contrast[data-contrast="high"] {
-      border: 1px solid black; }
+      border: 2px solid #686868; }
 
 .shopping {
   display: flex;
@@ -163,9 +163,12 @@ button {
     box-shadow: var(--pressed-shadow);
     margin-right: 15px;
     max-width: 200px;
-    border: 1px solid #e0e5ec; }
+    border: 2px solid #e0e5ec; }
+    .shopping input::placeholder {
+      opacity: 0.5; }
 
 .shopping-list {
+  background-color: var(--light-base);
   display: flex;
   flex-direction: column;
   margin-right: 15px;
@@ -199,15 +202,15 @@ input[data-contrast="low"], button[data-contrast="low"], div[data-contrast="low"
   border: 0; }
 
 input[data-contrast="high"], button[data-contrast="high"], div[data-contrast="high"] {
-  border: 2px solid black;
+  border: 2px solid #686868;
   box-shadow: unset;
-  color: black; }
+  color: #686868; }
 
 span[data-contrast="low"] {
   color: var(--dark-shadow); }
 
 span[data-contrast="high"] {
-  color: #000; }
+  color: #686868; }
 
 
 /*# sourceMappingURL=/style.97fcb138.css.map */

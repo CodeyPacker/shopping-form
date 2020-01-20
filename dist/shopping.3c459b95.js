@@ -212,9 +212,11 @@ contrastToggler.addEventListener('click', function (e) {
     if (el.dataset.contrast === 'high') {
       el.setAttribute('data-contrast', 'low');
       contrast = 'low';
+      contrastToggler.innerHTML = 'Increase contrast';
     } else {
       el.setAttribute('data-contrast', 'high');
       contrast = 'high';
+      contrastToggler.innerHTML = 'Decrease contrast';
     }
   });
 });

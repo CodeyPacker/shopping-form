@@ -45,7 +45,7 @@ button {
     margin-bottom: 20px;
 
     &[data-contrast="high"] {
-      border: 1px solid black;
+      border: 2px solid #686868;
     }
   }
 }
@@ -64,11 +64,13 @@ button {
     box-shadow: var(--pressed-shadow);
     margin-right: 15px;
     max-width: 200px;
-    border: 1px solid #e0e5ec;
+    border: 2px solid #e0e5ec;
+    &::placeholder { opacity: 0.5; }
   }
 }
 
 .shopping-list {
+  background-color: var(--light-base);
   display: flex;
   flex-direction: column;
   margin-right: 15px;
@@ -106,9 +108,9 @@ input, button, div {
   }
 
   &[data-contrast="high"] {
-    border: 2px solid black;
+    border: 2px solid #686868;
     box-shadow: unset;
-    color: black;
+    color: #686868;
   }
 }
 
@@ -117,6 +119,6 @@ span {
     color: var(--dark-shadow);
   }
   &[data-contrast="high"] {
-    color: #000;
+    color: #686868;
   }
 }
