@@ -130,6 +130,7 @@ var shoppingForm = document.querySelector('.shopping');
 var list = document.querySelector('.list'); // State
 
 var items = [];
+var contrast = '';
 
 function handleSubmit(e) {
   e.preventDefault();
@@ -149,7 +150,7 @@ function handleSubmit(e) {
 
 function displayItems() {
   var html = items.map(function (item) {
-    return "<li class=\"shopping-item\">\n        <input\n          value=".concat(item.id, "\n          type=\"checkbox\"\n          ").concat(item.complete && 'checked', "\n        >\n        <span class=\"itemName\" data-contrast=\"high\" >").concat(item.name, "</span>\n        <button value=").concat(item.id, " aria-label=\"Remove ").concat(item.name, " \"data-contrast=\"high\">&times;</button>\n      </li>\n      ");
+    return "<li class=\"shopping-item\">\n        <input\n          value=".concat(item.id, "\n          type=\"checkbox\"\n          ").concat(item.complete && 'checked', "\n        >\n        <span class=\"itemName\" data-contrast=\"").concat(contrast, "\" >").concat(item.name, "</span>\n        <button value=").concat(item.id, " aria-label=\"Remove ").concat(item.name, " \"data-contrast=\"").concat(contrast, "\">&times;</button>\n      </li>\n      ");
   }).join('');
   list.innerHTML = html;
 }
@@ -202,6 +203,21 @@ list.addEventListener('click', function (e) {
   }
 });
 restoreFromLocalStorage();
+var contrastToggler = document.querySelector('.toggle-contrast');
+contrastToggler.addEventListener('click', function (e) {
+  console.log(e);
+  var contrastElements = document.querySelectorAll('[data-contrast]');
+  var contrastArray = Array.from(contrastElements);
+  contrastArray.map(function (el) {
+    if (el.dataset.contrast === 'high') {
+      el.setAttribute('data-contrast', 'low');
+      contrast = 'low';
+    } else {
+      el.setAttribute('data-contrast', 'high');
+      contrast = 'high';
+    }
+  });
+});
 },{}],"../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';

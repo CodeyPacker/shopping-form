@@ -19,6 +19,7 @@ body {
   font-family: 'Open Sans', sans-serif;
   color: var(--dark-shadow);
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
@@ -32,12 +33,20 @@ button {
   border-radius: 4px;
   box-shadow: var(--shadow);
   border-radius: 4px;
-  transition: box-shadow .3s;
-  height: 32px;
-  width: 32px;
+  transition: box-shadow .3s, border .2s;
+  padding: 7px;
+
 
   &:hover {
     box-shadow: var(--pressed-shadow);
+  }
+
+  &.toggle-contrast {
+    margin-bottom: 20px;
+
+    &[data-contrast="high"] {
+      border: 1px solid black;
+    }
   }
 }
 
@@ -55,17 +64,17 @@ button {
     box-shadow: var(--pressed-shadow);
     margin-right: 15px;
     max-width: 200px;
-    width: 100%;
     border: 1px solid #e0e5ec;
   }
 }
 
 .shopping-list {
+  display: flex;
+  flex-direction: column;
   margin-right: 15px;
   margin-left: 15px;
   padding: 40px 30px;
   max-width: 400px;
-  width: 100%;
   min-height: 200px;
 	border-radius: 12px;
 	box-shadow: var(--shadow);

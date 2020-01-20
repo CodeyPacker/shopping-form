@@ -3,6 +3,7 @@ const list = document.querySelector('.list');
 
 // State
 let items = [];
+let contrast = '';
 
 function handleSubmit(e) {
   e.preventDefault();
@@ -33,8 +34,8 @@ function displayItems() {
           type="checkbox"
           ${item.complete && 'checked'}
         >
-        <span class="itemName" data-contrast="high" >${item.name}</span>
-        <button value=${item.id} aria-label="Remove ${item.name} "data-contrast="high">&times;</button>
+        <span class="itemName" data-contrast="${contrast}" >${item.name}</span>
+        <button value=${item.id} aria-label="Remove ${item.name} "data-contrast="${contrast}">&times;</button>
       </li>
       `
     )
@@ -82,3 +83,22 @@ list.addEventListener('click', function(e) {
 });
 
 restoreFromLocalStorage();
+
+const contrastToggler = document.querySelector('.toggle-contrast');
+
+contrastToggler.addEventListener('click', function(e) {
+  console.log(e);
+
+  const contrastElements = document.querySelectorAll('[data-contrast]');
+
+  const contrastArray = Array.from(contrastElements);
+  contrastArray.map(function(el) {
+    if (el.dataset.contrast === 'high') {
+      el.setAttribute('data-contrast', 'low')
+      contrast = 'low';
+    } else {
+      el.setAttribute('data-contrast', 'high')
+      contrast = 'high';
+    }
+  });
+});
