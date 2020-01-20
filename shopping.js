@@ -86,12 +86,10 @@ restoreFromLocalStorage();
 
 const contrastToggler = document.querySelector('.toggle-contrast');
 
-contrastToggler.addEventListener('click', function(e) {
-  console.log(e);
-
+function handleContrastToggle() {
   const contrastElements = document.querySelectorAll('[data-contrast]');
-
   const contrastArray = Array.from(contrastElements);
+
   contrastArray.map(function(el) {
     if (el.dataset.contrast === 'high') {
       el.setAttribute('data-contrast', 'low')
@@ -100,7 +98,9 @@ contrastToggler.addEventListener('click', function(e) {
     } else {
       el.setAttribute('data-contrast', 'high')
       contrast = 'high';
-      contrastToggler.innerHTML = 'Decrease contrast'
+      contrastToggler.innerHTML = 'Decrease contrast';
     }
   });
-});
+}
+
+contrastToggler.addEventListener('click', handleContrastToggle);

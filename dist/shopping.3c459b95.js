@@ -204,8 +204,8 @@ list.addEventListener('click', function (e) {
 });
 restoreFromLocalStorage();
 var contrastToggler = document.querySelector('.toggle-contrast');
-contrastToggler.addEventListener('click', function (e) {
-  console.log(e);
+
+function handleContrastToggle() {
   var contrastElements = document.querySelectorAll('[data-contrast]');
   var contrastArray = Array.from(contrastElements);
   contrastArray.map(function (el) {
@@ -219,7 +219,9 @@ contrastToggler.addEventListener('click', function (e) {
       contrastToggler.innerHTML = 'Decrease contrast';
     }
   });
-});
+}
+
+contrastToggler.addEventListener('click', handleContrastToggle);
 },{}],"../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
